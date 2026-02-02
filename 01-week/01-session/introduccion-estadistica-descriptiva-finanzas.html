@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a Estadística Descriptiva para Finanzas | Ingeniería de Sistemas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1e3c72;
+    --secondary-color: #2a5298;
+    --accent-color: #ff6b6b;
+    --light-bg: #f8f9fa;
+    --dark-text: #2c3e50;
+    --border-color: #e0e0e0;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--dark-text);
+    background-color: #fff;
+}
+
+/* Header */
+.main-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 0;
+}
+
+.top-bar {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.brand-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand-name {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 5px 0;
+}
+
+.main-nav {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom-color: var(--accent-gold);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Main Content */
+.main-content {
+    padding: 50px 0;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h1 {
+    color: var(--primary-color);
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    color: var(--secondary-color);
+    font-size: 2em;
+    margin-bottom: 25px;
+    border-left: 5px solid var(--accent-gold);
+    padding-left: 15px;
+}
+
+h3 {
+    color: var(--primary-color);
+    font-size: 1.5em;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+h4 {
+    color: var(--secondary-color);
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 60px 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.hero-section h1 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.lead {
+    font-size: 1.2em;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Divider */
+.divider {
+    border: none;
+    border-top: 2px solid var(--border-color);
+    margin: 40px 0;
+}
+
+.divider-thick {
+    border: none;
+    border-top: 3px solid var(--accent-gold);
+    margin: 50px 0;
+}
+
+/* Definition Box */
+.definition-box {
+    background-color: #e8f4f0;
+    border-left: 5px solid var(--secondary-color);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-size: 1.05em;
+}
+
+/* Reflection Box */
+.reflection-box {
+    background-color: #fff3cd;
+    border-left: 5px solid var(--warning-color);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.reflection-box h4 {
+    color: #856404;
+    margin-bottom: 10px;
+}
+
+.reflection-box p {
+    color: #856404;
+    line-height: 1.7;
+}
+
+.reflection-box ul {
+    margin-left: 20px;
+    color: #856404;
+}
+
+/* Example Box */
+.example-box {
+    background-color: #f0f8ff;
+    border-left: 5px solid #0066cc;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.example-box h4 {
+    color: #0066cc;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+/* Comparison Cards */
+.comparison-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card h3,
+.card h4 {
+    color: var(--secondary-color);
+    margin-top: 0;
+}
+
+/* Strategy Grid */
+.strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.strategy-box {
+    background-color: var(--light-bg);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.strategy-box h5 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.strategy-box ul {
+    list-style-position: inside;
+    margin-left: 10px;
+}
+
+.strategy-box li {
+    margin-bottom: 8px;
+}
+
+/* Tables */
+.table-responsive {
+    overflow-x: auto;
+    margin: 30px 0;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table thead tr {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: left;
+    font-weight: 500;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.styled-table tbody tr:hover {
+    background-color: var(--light-bg);
+}
+
+.styled-table tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+}
+
+/* Code/Formula Blocks */
+pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--primary-color);
+}
+
+pre code {
+    background-color: transparent;
+    color: #f8f8f2;
+    padding: 0;
+}
+
+/* Formula Display */
+.formula {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    text-align: center;
+    font-size: 1.1em;
+    font-family: 'Courier New', monospace;
+}
+
+/* Case Study Section */
+.case-study-section {
+    background-color: var(--light-bg);
+    padding: 40px;
+    border-radius: 10px;
+    margin: 40px 0;
+}
+
+.case-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.case-header h2 {
+    border-left: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+}
+
+.scenario-box {
+    background: white;
+    border-left: 4px solid var(--accent-gold);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.scenario-box h4 {
+    color: var(--secondary-color);
+    margin-top: 0;
+}
+
+/* Footer */
+.main-footer {
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+    margin-top: 50px;
+}
+
+.main-footer p {
+    margin: 8px 0;
+    font-size: 0.95em;
+}
+
+.main-footer ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.main-footer li {
+    margin: 8px 0;
+}
+
+.main-footer a {
+    color: #fff9e6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.main-footer a:hover {
+    color: var(--accent-gold);
+}
+
+/* Scroll to Top Button */
+#scrollTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 99;
+    transition: background-color 0.3s;
+}
+
+#scrollTopBtn:hover {
+    background-color: var(--accent-gold);
+}
+
+/* Lists */
+ul, ol {
+    margin: 15px 0;
+    margin-left: 30px;
+}
+
+li {
+    margin: 8px 0;
+    line-height: 1.7;
+}
+
+/* Links */
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--accent-gold);
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+    }
+    
+    .hero-section {
+        padding: 40px 20px;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+    }
+    
+    .main-nav a {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+    
+    .comparison-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .strategy-grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container brand-container">
+                <img src="https://raw.githubusercontent.com/code-corhuila/material-mineria-datos/b3725d694125ab35294ddfe415a327bc1445d32c/01-week/01-session/LOGO%20CORHUILA%20BLANCO%20PNG%20(2).png" alt="Logo Corhuila" class="logo-corhuila" style="max-width: 120px; height: auto; margin-bottom: 15px;">
+                <h1 class="brand-name" style="color: white;">Estadística Descriptiva para Finanzas</h1>
+                <p style="color: white;">Ingeniería de Sistemas | Especialidad Financiera</p>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="#introduccion">Introducción</a></li>
+                    <li><a href="#conceptos">Conceptos Clave</a></li>
+                    <li><a href="#medidas-tendencia">Medidas de Tendencia</a></li>
+                    <li><a href="#medidas-dispersion">Medidas de Dispersión</a></li>
+                    <li><a href="#distribucion">Distribución de Datos</a></li>
+                    <li><a href="#casos-finanzas">Casos en Finanzas</a></li>
+                    <li><a href="#herramientas">Herramientas</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container main-content">
+
+        <section id="introduccion" class="hero-section">
+            <h1>Estadística Descriptiva para Finanzas</h1>
+            <p class="lead">Aprende a analizar, resumir y visualizar datos financieros para tomar decisiones informadas. La estadística descriptiva es la base de cualquier análisis financiero profesional.</p>
+        </section>
+
+        <hr class="divider">
+
+        <section id="que-es">
+            <h2>1. ¿Qué es la Estadística Descriptiva?</h2>
+            <p>La estadística descriptiva es el conjunto de técnicas para recopilar, organizar, resumir y presentar datos de manera que sea fácil entenderlos e interpretarlos. Es el primer paso en cualquier análisis de datos.</p>
+            
+            <blockquote class="definition-box">
+                <strong>Estadística Descriptiva:</strong> Rama de la estadística que utiliza técnicas para describir las características principales de un conjunto de datos mediante números, tablas y gráficos, sin hacer inferencias sobre poblaciones más grandes.
+            </blockquote>
+
+            <h3>¿Por Qué es Importante en Finanzas?</h3>
+            <ul>
+                <li><strong>Análisis de Rendimientos:</strong> Entender el desempeño histórico de inversiones</li>
+                <li><strong>Gestión de Riesgo:</strong> Medir la volatilidad y variabilidad de activos</li>
+                <li><strong>Toma de Decisiones:</strong> Base para decisiones de inversión fundamentadas</li>
+                <li><strong>Comunicación:</strong> Presentar información clara a stakeholders</li>
+                <li><strong>Detección de Anomalías:</strong> Identificar comportamientos inusuales en datos</li>
+            </ul>
+
+            <h3>Tipos de Variables Financieras</h3>
+            <div class="comparison-cards">
+                <div class="card">
+                    <h4>Cuantitativas Continuas</h4>
+                    <p>Precios de acciones, tasas de interés, rendimientos, volatilidad. Pueden tomar infinitos valores.</p>
+                </div>
+                <div class="card">
+                    <h4>Cuantitativas Discretas</h4>
+                    <p>Número de operaciones, cantidad de acciones, número de clientes. Solo valores enteros.</p>
+                </div>
+                <div class="card">
+                    <h4>Cualitativas Nominales</h4>
+                    <p>Tipo de activo, sector industrial, región geográfica. Categorías sin orden.</p>
+                </div>
+                <div class="card">
+                    <h4>Cualitativas Ordinales</h4>
+                    <p>Clasificación de riesgo (alto, medio, bajo), calificación crediticia. Categorías ordenadas.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <section id="conceptos">
+            <h2>2. Conceptos Fundamentales</h2>
+
+            <h3>Población vs. Muestra</h3>
+            <div class="strategy-grid">
+                <div class="strategy-box">
+                    <h5>Población (N)</h5>
+                    <p>Conjunto completo de todos los elementos que nos interesan. Ejemplo: Todos los precios diarios históricos del S&P 500.</p>
+                </div>
+                <div class="strategy-box">
+                    <h5>Muestra (n)</h5>
+                    <p>Subconjunto representativo de la población. Ejemplo: Precios del S&P 500 durante los últimos 5 años.</p>
+                </div>
+                <div class="strategy-box">
+                    <h5>Parámetro</h5>
+                    <p>Medida descriptiva de una población (generalmente desconocida). Ejemplo: Media poblacional (μ)</p>
+                </div>
+                <div class="strategy-box">
+                    <h5>Estadístico</h5>
+                    <p>Medida descriptiva de una muestra (calculada a partir de datos observados). Ejemplo: Media muestral (x̄)</p>
+                </div>
+            </div>
+
+            <h3>Escala de Medición</h3>
+            <div class="table-responsive">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Escala</th>
+                            <th>Descripción</th>
+                            <th>Ejemplo Financiero</th>
+                            <th>Operaciones Permitidas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nominal</strong></td>
+                            <td>Categorización sin orden</td>
+                            <td>Tipo de activo (acciones, bonos, derivados)</td>
+                            <td>Conteo, moda</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ordinal</strong></td>
+                            <td>Categorización con orden</td>
+                            <td>Rating crediticio (AAA, AA, A, BBB...)</td>
+                            <td>Conteo, moda, mediana</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Intervalo</strong></td>
+                            <td>Datos numéricos con cero relativo</td>
+                            <td>Temperatura (°C), años</td>
+                            <td>Media, desviación estándar</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Razón</strong></td>
+                            <td>Datos numéricos con cero absoluto</td>
+                            <td>Precio, rendimiento, capital</td>
+                            <td>Todas las operaciones matemáticas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <section id="medidas-tendencia">
+            <h2>3. Medidas de Tendencia Central</h2>
+            <p>Estas medidas representan el "centro" o valor típico de un conjunto de datos.</p>
+
+            <h3>Media Aritmética (x̄ o μ)</h3>
+            <p>La suma de todos los valores dividida por el número de observaciones. Es la medida más común.</p>
+            <div class="formula">
+                x̄ = (x₁ + x₂ + ... + xₙ) / n
+            </div>
+
+            <div class="example-box">
+                <h4>📊 Ejemplo: Rentabilidad Mensual de un Fondo</h4>
+                <p>Rentabilidades mensuales: 2.5%, 3.2%, 1.8%, 4.1%, 2.9%</p>
+                <p><strong>Media = (2.5 + 3.2 + 1.8 + 4.1 + 2.9) / 5 = 2.9%</strong></p>
+                <p>El rendimiento promedio del fondo en estos 5 meses fue 2.9%.</p>
+            </div>
+
+            <h3>Mediana (Me)</h3>
+            <p>El valor central cuando los datos están ordenados. Divide el conjunto en dos mitades iguales.</p>
+
+            <div class="example-box">
+                <h4>📊 Ejemplo: Precios de Cierre</h4>
+                <p>Precios ordenados: $45, $48, $51, $52, $55, $58, $60</p>
+                <p><strong>Mediana = $52 (valor central del 7 datos)</strong></p>
+                <p>La mitad de los precios estuvo por debajo de $52 y la otra mitad por encima.</p>
+            </div>
+
+            <h3>Moda (Mo)</h3>
+            <p>El valor que aparece con mayor frecuencia en el conjunto de datos.</p>
+
+            <div class="example-box">
+                <h4>📊 Ejemplo: Rango de Precios Más Frecuente</h4>
+                <p>Precios: 50, 50, 51, 51, 51, 52, 53</p>
+                <p><strong>Moda = 51 (aparece 3 veces)</strong></p>
+                <p>El precio más común fue $51.</p>
+            </div>
+
+            <h3>Comparación de Medidas de Tendencia</h3>
+            <div class="table-responsive">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Medida</th>
+                            <th>Ventajas</th>
+                            <th>Desventajas</th>
+                            <th>Mejor Para</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Media</strong></td>
+                            <td>Usa todos los datos, fácil de calcular</td>
+                            <td>Sensible a valores extremos (outliers)</td>
+                            <td>Datos simétricos, sin extremos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mediana</strong></td>
+                            <td>Resistente a outliers</td>
+                            <td>No usa toda la información disponible</td>
+                            <td>Datos con valores extremos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Moda</strong></td>
+                            <td>Útil para datos categóricos</td>
+                            <td>Puede no existir o tener múltiples valores</td>
+                            <td>Datos cualitativos, distribuciones bimodales</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="reflection-box">
+                <h4>💡 Consejo Financiero</h4>
+                <p>En finanzas, es común usar <strong>media y mediana juntas</strong>. Si difieren significativamente, indica presencia de valores extremos (posibles crisis o booms de mercado) que debes investigar.</p>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <section id="medidas-dispersion">
+            <h2>4. Medidas de Dispersión o Variabilidad</h2>
+            <p>Miden qué tan dispersos o concentrados están los datos alrededor de la media. En finanzas, esto se relaciona con el riesgo.</p>
+
+            <h3>Rango (R)</h3>
+            <p>Diferencia entre el valor máximo y mínimo.</p>
+            <div class="formula">
+                R = Máximo - Mínimo
+            </div>
+
+            <div class="example-box">
+                <h4>📊 Ejemplo: Volatilidad de Precio</h4>
+                <p>Precio máximo del mes: $120</p>
+                <p>Precio mínimo del mes: $90</p>
+                <p><strong>Rango = $120 - $90 = $30</strong></p>
+            </div>
+
+            <h3>Varianza (σ² o s²)</h3>
+            <p>Promedio de las desviaciones al cuadrado respecto a la media. Mide la dispersión de los datos.</p>
+            <div class="formula">
+                σ² = Σ(xᵢ - μ)² / N    (población)
+                s² = Σ(xᵢ - x̄)² / (n-1)  (muestra)
+            </div>
+
+            <h3>Desviación Estándar (σ o s)</h3>
+            <p>Raíz cuadrada de la varianza. Está en las mismas unidades que los datos, lo que la hace más interpretable.</p>
+            <div class="formula">
+                σ = √(σ²)    (población)
+                s = √(s²)    (muestra)
+            </div>
+
+            <div class="example-box">
+                <h4>📊 Ejemplo: Volatilidad de Retornos</h4>
+                <p><strong>Fondo A:</strong> Retornos: 5%, 6%, 4%, 5%, 5%</p>
+                <p><strong>Fondo B:</strong> Retornos: 2%, 8%, 3%, 7%, 5%</p>
+                <p><strong>Media de A = 5% | Media de B = 5%</strong></p>
+                <p>Aunque tienen la misma media, el Fondo B es más riesgoso (más variable).</p>
+                <p>Desviación estándar A ≈ 0.7% | Desviación estándar B ≈ 2.4%</p>
+            </div>
+
+            <h3>Coeficiente de Variación (CV)</h3>
+            <p>Razón entre la desviación estándar y la media. Útil para comparar volatilidad relativa entre activos con diferentes escalas.</p>
+            <div class="formula">
+                CV = (s / x̄) × 100%
+            </div>
+
+            <div class="reflection-box">
+                <h4>💡 Aplicación en Finanzas: Riesgo</h4>
+                <p>La desviación estándar mide la <strong>volatilidad</strong> de un activo. Una mayor desviación estándar indica mayor riesgo y potencialmente mayores fluctuaciones de precio. Los inversores conservadores prefieren activos con menor desviación estándar.</p>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <section id="distribucion">
+            <h2>5. Distribución de Datos y Forma</h2>
+
+            <h3>Percentiles y Cuartiles</h3>
+            <p>Dividen los datos en partes iguales ordenadas.</p>
+
+            <div class="strategy-grid">
+                <div class="strategy-box">
+                    <h5>Cuartiles (Q₁, Q₂, Q₃)</h5>
+                    <p><strong>Q₁:</strong> 25% de datos (P₂₅)</p>
+                    <p><strong>Q₂:</strong> 50% de datos (mediana)</p>
+                    <p><strong>Q₃:</strong> 75% de datos (P₇₅)</p>
+                </div>
+                <div class="strategy-box">
+                    <h5>Rango Intercuartílico (IQR)</h5>
+                    <p>IQR = Q₃ - Q₁</p>
+                    <p>Contiene el 50% central de los datos</p>
+                    <p>Útil para identificar outliers</p>
+                </div>
+                <div class="strategy-box">
+                    <h5>Detección de Outliers</h5>
+                    <p>Límite inferior: Q₁ - 1.5×IQR</p>
+                    <p>Límite superior: Q₃ + 1.5×IQR</p>
+                    <p>Valores fuera son potenciales outliers</p>
+                </div>
+            </div>
+
+            <h3>Asimetría (Skewness)</h3>
+            <p>Mide si la distribución es simétrica o sesgada.</p>
+
+            <div class="comparison-cards">
+                <div class="card">
+                    <h4>Distribución Simétrica</h4>
+                    <p>Media = Mediana = Moda</p>
+                    <p>Los datos se distribuyen equitativamente a ambos lados.</p>
+                </div>
+                <div class="card">
+                    <h4>Asimetría Positiva (Derecha)</h4>
+                    <p>Cola larga hacia la derecha</p>
+                    <p>Media > Mediana</p>
+                    <p>Ejemplo: Retornos de inversiones (ocasionales grandes ganancias)</p>
+                </div>
+                <div class="card">
+                    <h4>Asimetría Negativa (Izquierda)</h4>
+                    <p>Cola larga hacia la izquierda</p>
+                    <p>Media < Mediana</p>
+                    <p>Ejemplo: Pérdidas en cartera (ocasionales grandes pérdidas)</p>
+                </div>
+            </div>
+
+            <h3>Curtosis (Kurtosis)</h3>
+            <p>Mide la concentración de datos en la zona central vs. colas de la distribución.</p>
+
+            <div class="comparison-cards">
+                <div class="card">
+                    <h4>Mesocúrtica (Normal)</h4>
+                    <p>Curtosis = 0</p>
+                    <p>Distribución normal</p>
+                </div>
+                <div class="card">
+                    <h4>Leptocúrtica (Puntuda)</h4>
+                    <p>Curtosis > 0</p>
+                    <p>Picos concentrados, colas pesadas</p>
+                    <p>Mayor probabilidad de eventos extremos</p>
+                </div>
+                <div class="card">
+                    <h4>Platicúrtica (Plana)</h4>
+                    <p>Curtosis < 0</p>
+                    <p>Datos más dispersos, colas ligeras</p>
+                </div>
+            </div>
+
+            <div class="reflection-box">
+                <h4>💡 Importancia en Finanzas: Colas Pesadas</h4>
+                <p>Los mercados financieros frecuentemente exhiben <strong>leptocurtosis</strong> (colas pesadas), lo que significa que los eventos extremos son más probables de lo que predice una distribución normal. Esto es crítico para la gestión de riesgo.</p>
+            </div>
+        </section>
+
+        <hr class="divider-thick">
+
+        <section id="casos-finanzas" class="case-study-section">
+            <div class="case-header">
+                <h2>6. Casos Prácticos en Finanzas</h2>
+                <h3>Aplicaciones del Mundo Real</h3>
+            </div>
+
+            <h3>Caso 1: Análisis de Cartera de Inversiones</h3>
+            <div class="scenario-box">
+                <h4>Escenario</h4>
+                <p>Un gestor de cartera tiene 3 fondos mutualistas y necesita analizar su rendimiento histórico.</p>
+                
+                <h4>Análisis Descriptivo</h4>
+                <pre><code>Fondo de Acciones:      Media: 8.5% | Desv Est: 12.3% | CV: 1.45
+Fondo de Bonos:        Media: 4.2% | Desv Est: 3.1%  | CV: 0.74
+Fondo Mixto:           Media: 6.8% | Desv Est: 7.2%  | CV: 1.06
+
+Análisis:
+- Fondo de Acciones: Mayor retorno pero más volátil (riesgoso)
+- Fondo de Bonos: Menor retorno y menos volátil (seguro)
+- Fondo Mixto: Balance intermedio</code></pre>
+                
+                <h4>Decisión</h4>
+                <p>Según el perfil de riesgo del inversor, se puede diseñar una cartera equilibrada. Un inversor conservador preferiría más proporción en Bonos, mientras que uno agresivo optaría por Acciones.</p>
+            </div>
+
+            <h3>Caso 2: Control de Calidad en Servicios Financieros</h3>
+            <div class="scenario-box">
+                <h4>Escenario</h4>
+                <p>Un banco analiza el tiempo de atención al cliente en una semana.</p>
+                
+                <h4>Análisis</h4>
+                <pre><code>Tiempos de atención (minutos): 
+5, 7, 6, 8, 5, 15, 6, 5, 7, 8
+
+Media: 7.2 minutos
+Mediana: 6.5 minutos
+Moda: 5 minutos
+Q₁ = 5.25 | Q₃ = 7.75 | IQR = 2.5
+Outlier detectado: 15 minutos
+
+Interpretación:
+- Hay un valor extremo (15 min) que distorsiona la media
+- La mediana (6.5) es más representativa del servicio típico
+- El 50% de atenciones se completan entre 5-8 minutos</code></pre>
+                
+                <h4>Acción</h4>
+                <p>Investigar qué causó el tiempo excesivo de 15 minutos. Mejorar eficiencia para que el 90% de atenciones se completen en menos de 8 minutos.</p>
+            </div>
+
+            <h3>Caso 3: Análisis de Volatilidad de Mercado</h3>
+            <div class="scenario-box">
+                <h4>Escenario</h4>
+                <p>Un analista estudia el comportamiento del índice S&P 500 en dos períodos.</p>
+                
+                <h4>Análisis</h4>
+                <pre><code>Período Normal (2019):
+Retorno promedio: 3.1% | Desv Est: 0.8%
+
+Período de Crisis (2020):
+Retorno promedio: 2.8% | Desv Est: 3.2%
+
+Ratio de Sharpe aproximado (comparación riesgo-retorno):
+Período Normal: 3.1/0.8 = 3.88
+Período de Crisis: 2.8/3.2 = 0.88
+
+Conclusión:
+El mercado fue mucho más volátil en 2020
+El mismo retorno se logró con mayor riesgo
+Los inversores demandaban mayor retorno por el riesgo asumido</code></pre>
+                
+                <h4>Implicación</h4>
+                <p>En períodos de alta volatilidad, la diversificación es crítica. No basta analizar medias, hay que considerar desviaciones estándar.</p>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <section id="herramientas">
+            <h2>7. Herramientas para Análisis Descriptivo</h2>
+            <p>Las herramientas modernas facilitan el cálculo y visualización de estadísticas descriptivas.</p>
+
+            <h3>Software Especializado en Finanzas</h3>
+            <div class="comparison-cards">
+                <div class="card">
+                    <h4>Microsoft Excel</h4>
+                    <p>La herramienta más accesible y usada en finanzas corporativas.</p>
+                    <p><strong>Funciones:</strong> PROMEDIO(), MEDIANA(), DESVEST(), PERCENTIL(), CUARTIL()</p>
+                    <p><strong>Ventaja:</strong> Ampliamente disponible, fácil de aprender</p>
+                </div>
+                <div class="card">
+                    <h4>Bloomberg Terminal</h4>
+                    <p>Estándar de la industria para analistas profesionales.</p>
+                    <p><strong>Funciones:</strong> Análisis de portfolios, análisis técnico avanzado</p>
+                    <p><strong>Ventaja:</strong> Datos en tiempo real, análisis sofisticados</p>
+                </div>
+                <div class="card">
+                    <h4>Google Sheets</h4>
+                    <p>Versión en nube de Excel con colaboración en tiempo real.</p>
+                    <p><strong>Funciones:</strong> Mismas que Excel pero en línea</p>
+                    <p><strong>Ventaja:</strong> Colaboración, acceso desde cualquier lugar</p>
+                </div>
+                <div class="card">
+                    <h4>Tableau / Power BI</h4>
+                    <p>Herramientas de visualización e inteligencia de negocios.</p>
+                    <p><strong>Funciones:</strong> Dashboards interactivos, análisis visual</p>
+                    <p><strong>Ventaja:</strong> Presentaciones profesionales, análisis exploratoria visual</p>
+                </div>
+            </div>
+
+            <h3>Funciones Clave en Excel</h3>
+            <div class="table-responsive">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Estadístico</th>
+                            <th>Función Excel</th>
+                            <th>Ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Media</td>
+                            <td>=PROMEDIO(rango)</td>
+                            <td>=PROMEDIO(A1:A100)</td>
+                        </tr>
+                        <tr>
+                            <td>Mediana</td>
+                            <td>=MEDIANA(rango)</td>
+                            <td>=MEDIANA(A1:A100)</td>
+                        </tr>
+                        <tr>
+                            <td>Moda</td>
+                            <td>=MODA(rango)</td>
+                            <td>=MODA(A1:A100)</td>
+                        </tr>
+                        <tr>
+                            <td>Desv. Estándar</td>
+                            <td>=DESVEST(rango)</td>
+                            <td>=DESVEST(A1:A100)</td>
+                        </tr>
+                        <tr>
+                            <td>Varianza</td>
+                            <td>=VAR(rango)</td>
+                            <td>=VAR(A1:A100)</td>
+                        </tr>
+                        <tr>
+                            <td>Mínimo</td>
+                            <td>=MIN(rango)</td>
+                            <td>=MIN(A1:A100)</td>
+                        </tr>
+                        <tr>
+                            <td>Máximo</td>
+                            <td>=MAX(rango)</td>
+                            <td>=MAX(A1:A100)</td>
+                        </tr>
+                        <tr>
+                            <td>Percentil</td>
+                            <td>=PERCENTIL(rango,k)</td>
+                            <td>=PERCENTIL(A1:A100,0.25)</td>
+                        </tr>
+                        <tr>
+                            <td>Cuartil</td>
+                            <td>=CUARTIL(rango,num)</td>
+                            <td>=CUARTIL(A1:A100,1)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Visualización de Datos</h3>
+            <div class="strategy-grid">
+                <div class="strategy-box">
+                    <h5>Histogramas</h5>
+                    <p>Muestran la distribución de frecuencias. Útiles para visualizar asimetría y curtosis.</p>
+                </div>
+                <div class="strategy-box">
+                    <h5>Diagrama de Caja (Box Plot)</h5>
+                    <p>Muestran cuartiles, mediana y outliers. Ideales para comparar múltiples distribuciones.</p>
+                </div>
+                <div class="strategy-box">
+                    <h5>Gráficos de Línea</h5>
+                    <p>Para series de tiempo financieras. Muestran tendencias y volatilidad.</p>
+                </div>
+                <div class="strategy-box">
+                    <h5>Gráficos de Dispersión</h5>
+                    <p>Para mostrar relaciones entre dos variables. Base para análisis de correlación.</p>
+                </div>
+            </div>
+
+            <div class="reflection-box">
+                <h4>💡 Recomendación Práctica</h4>
+                <p>En el ámbito financiero profesional, <strong>Excel + Power BI</strong> es la combinación ganadora: Excel para cálculos precisos y Power BI para visualizaciones que comunican historias de datos a ejecutivos.</p>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <section id="proximos-pasos">
+            <h2>8. Próximos Pasos</h2>
+
+            <h3>Ruta de Aprendizaje Sugerida</h3>
+            <div class="table-responsive">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Fase</th>
+                            <th>Tiempo</th>
+                            <th>Temas</th>
+                            <th>Proyecto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Fundamentos</strong></td>
+                            <td>2 semanas</td>
+                            <td>Estadística descriptiva, conceptos clave</td>
+                            <td>Análisis de un activo financiero</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Excel Avanzado</strong></td>
+                            <td>2 semanas</td>
+                            <td>Funciones estadísticas, tablas dinámicas</td>
+                            <td>Dashboard de análisis de cartera</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Visualización</strong></td>
+                            <td>1 semana</td>
+                            <td>Gráficos, Power BI básico</td>
+                            <td>Reportes interactivos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Probabilidad</strong></td>
+                            <td>2 semanas</td>
+                            <td>Conceptos básicos, distribuciones</td>
+                            <td>Modelado de riesgos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inferencia</strong></td>
+                            <td>2 semanas</td>
+                            <td>Estimación, hipótesis, correlación</td>
+                            <td>Análisis de significancia de estrategias</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Recursos para Profundizar</h3>
+            <div class="comparison-cards">
+                <div class="card">
+                    <h4>Libros Esenciales</h4>
+                    <ul>
+                        <li>"Financial Statement Analysis" - Lémes & Rahl</li>
+                        <li>"Quantitative Finance for Dummies" - Steve Bell</li>
+                        <li>"The Intelligent Investor" - Benjamin Graham</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Cursos Online</h4>
+                    <ul>
+                        <li>Coursera: Finance for Everyone</li>
+                        <li>edX: Finanzas Corporativas</li>
+                        <li>Udemy: Excel para Finanzas</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Herramientas Prácticas</h4>
+                    <ul>
+                        <li>Yahoo Finance (datos gratuitos)</li>
+                        <li>Investing.com (análisis técnico)</li>
+                        <li>macrotrends.net (datos históricos)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Certificaciones</h4>
+                    <ul>
+                        <li>CFA (Chartered Financial Analyst)</li>
+                        <li>CFP (Certified Financial Planner)</li>
+                        <li>Microsoft Data Analyst</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="reflection-box">
+                <h4>🎯 Meta Final</h4>
+                <p>Dominar estadística descriptiva es el <strong>cimiento de cualquier carrera en finanzas</strong>. Sin esta base, no puedes entender análisis técnico, gestión de riesgo, o toma de decisiones de inversión. Invierte tiempo en practicar con datos reales.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <h3>Estadística Descriptiva para Finanzas</h3>
+            <p><strong>Creado por:</strong> Ing. Julian Quimbayo Castro</p>
+            <p>Última actualización: Febrero 2026</p>
+            <p>Este material es de uso educativo. Para análisis financiero profesional, consulta con expertos certificados.</p>
+            <ul>
+                <li><a href="https://www.sec.gov/" target="_blank">SEC (EE.UU.)</a></li>
+                <li><a href="https://www.cfainstitute.org/" target="_blank">CFA Institute</a></li>
+                <li><a href="https://www.investopedia.com/" target="_blank">Investopedia</a></li>
+                <li><a href="https://finance.yahoo.com/" target="_blank">Yahoo Finance</a></li>
+            </ul>
+            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.9;">© Corporación Universitaria de Huila - Corhuila</p>
+        </div>
+    </footer>
+
+    <button id="scrollTopBtn" title="Volver arriba">↑</button>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    setupScrollButton();
+    setupNavigation();
+    setupSmoothScroll();
+    highlightActiveSection();
+});
+
+// Scroll to Top Button
+function setupScrollButton() {
+    const scrollBtn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', function() {
+        if (document.documentElement.scrollTop > 300 || document.body.scrollTop > 300) {
+            scrollBtn.style.display = 'block';
+        } else {
+            scrollBtn.style.display = 'none';
+        }
+    });
+
+    scrollBtn.addEventListener('click', function() {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+    });
+}
+
+// Smooth Scroll
+function setupSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+// Active Navigation Highlight
+function setupNavigation() {
+    const navLinks = document.querySelectorAll('.main-nav a');
+
+    window.addEventListener('scroll', highlightActiveSection);
+}
+
+function highlightActiveSection() {
+    const navLinks = document.querySelectorAll('.main-nav a');
+    let current = '';
+
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Copy Code to Clipboard
+document.querySelectorAll('pre').forEach(pre => {
+    const button = document.createElement('button');
+    button.textContent = '📋 Copiar';
+    button.style.cssText = `
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        padding: 8px 12px;
+        background-color: #27ae60;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: 10;
+    `;
+
+    pre.style.position = 'relative';
+    pre.appendChild(button);
+
+    pre.addEventListener('mouseenter', () => {
+        button.style.opacity = '1';
+    });
+
+    pre.addEventListener('mouseleave', () => {
+        button.style.opacity = '0';
+    });
+
+    button.addEventListener('click', () => {
+        const code = pre.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+            const originalText = button.textContent;
+            button.textContent = '✅ Copiado!';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+        });
+    });
+});
+    </script>
+</body>
+</html>
